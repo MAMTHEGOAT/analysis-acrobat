@@ -6105,7 +6105,7 @@ const MOVE2 = ["Additionally","Moreover","Furthermore"];
 const SEEN_KEY = "langAnalysisSeen_v1";
 
 let P, slot, draft, opening, completed, currentIdea, awaitingSel, cur=0;
-let words=[], wordEls=[], usedTargets, usedRanges, usedWordIdx, pendingStart, liveByWord={}, liveRange={};
+let words=[], wordEls=[], usedTargets, usedRanges, usedWordIdx, pendingStart;
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -6182,13 +6182,9 @@ function startPassage(i){
 function showSkipBar(show){ const b=$('skipBar'); if(b) b.style.display = show ? 'flex' : 'none'; }
 
 function renderPassage(){
-  const pass=$('passage'); pass.innerHTML=''; words=[]; wordEls=[]; liveByWord={}; liveRange={};
-  const liveSpans=[];
-  P.targets.forEach(function(t,ti){ const qs=P.text.indexOf(t.quote); if(qs>=0) liveSpans.push({qs:qs, qe:qs+t.quote.length, ti:ti}); });
-  let pos=0;
+  const pass=$('passage'); pass.innerHTML=''; words=[]; wordEls=[];
   P.text.split(/(\s+)/).forEach(tok=>{
     if(tok==='') return;
-    const s=pos, e=pos+tok.length; pos=e;
     if(/^\s+$/.test(tok)){ pass.appendChild(document.createTextNode(tok)); return; }
     const span=document.createElement('span');
     span.className='word'; span.textContent=tok;
@@ -6196,8 +6192,6 @@ function renderPassage(){
     span.addEventListener('click',()=>onWordTap(myIdx));
     pass.appendChild(span);
     words.push(tok); wordEls.push(span);
-    const L=liveSpans.find(x=> s < x.qe && e > x.qs);
-    if(L){ liveByWord[myIdx]=L.ti; const r=liveRange[L.ti]||(liveRange[L.ti]={a:myIdx,b:myIdx}); r.a=Math.min(r.a,myIdx); r.b=Math.max(r.b,myIdx); }
   });
   refreshWords();
 }
