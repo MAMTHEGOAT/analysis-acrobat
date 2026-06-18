@@ -28,6 +28,10 @@
   .word:hover{background:#f1ecff;}
   .word.pending{background:#ddd6fe;outline:1px solid var(--accent);}
   .word.used{background:var(--mark);}
+  .word.live{background:#cfe8fb;box-shadow:inset 0 -2px 0 #2f86c5;}
+  .word.live:hover{background:#aed6f5;}
+  .passage.selecting .word:not(.live){cursor:default;}
+  .passage.selecting .word:not(.live):hover{background:transparent;}
   .draft{font-size:18px;line-height:1.95;min-height:30px;}
   .draft p{margin:0 0 10px;}
   .blank{display:inline-block;min-width:26px;border-bottom:2px solid var(--accent);color:var(--accent);font-family:system-ui,sans-serif;font-size:13px;padding:0 6px;opacity:.8;}
@@ -6105,7 +6109,7 @@ const MOVE2 = ["Additionally","Moreover","Furthermore"];
 const SEEN_KEY = "langAnalysisSeen_v1";
 
 let P, slot, draft, opening, completed, currentIdea, awaitingSel, cur=0;
-let words=[], wordEls=[], usedTargets, usedRanges, usedWordIdx, pendingStart;
+let words=[], wordEls=[], usedTargets, usedRanges, usedWordIdx, pendingStart, liveByWord={}, liveRange={};
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -6182,8 +6186,13 @@ function startPassage(i){
 function showSkipBar(show){ const b=$('skipBar'); if(b) b.style.display = show ? 'flex' : 'none'; }
 
 function renderPassage(){
-  const pass=$('passage'); pass.innerHTML=''; words=[]; wordEls=[];
+  const pass=$('passage'); pass.innerHTML=''; words=[]; wordEls=[]; liveByWord={}; liveRange={};
+  const liveSpans=[];
+  P.targets.forEach(function(t,ti){ const qs=P.text.indexOf(t.quote); if(qs>=0) liveSpans.push({qs:qs, qe:qs+t.quote.length, ti:ti}); });
+  let pos=0;
   P.text.split(/(\s+)/).forEach(tok=>{
+    if(tok==='') return;
+    const s=pos, e=pos+tok.length; pos=e;
     if(/^\s+$/.test(tok)){ pass.appendChild(document.createTextNode(tok)); return; }
     const span=document.createElement('span');
     span.className='word'; span.textContent=tok;
@@ -6191,6 +6200,8 @@ function renderPassage(){
     span.addEventListener('click',()=>onWordTap(myIdx));
     pass.appendChild(span);
     words.push(tok); wordEls.push(span);
+    const L=liveSpans.find(x=> s < x.qe && e > x.qs);
+    if(L){ liveByWord[myIdx]=L.ti; const r=liveRange[L.ti]||(liveRange[L.ti]={a:myIdx,b:myIdx}); r.a=Math.min(r.a,myIdx); r.b=Math.max(r.b,myIdx); }
   });
   refreshWords();
 }
@@ -6198,23 +6209,26 @@ function refreshWords(){
   wordEls.forEach((el,i)=>{
     el.classList.toggle('used', usedWordIdx.has(i));
     el.classList.toggle('pending', pendingStart===i);
+    el.classList.toggle('live', awaitingSel && liveByWord.hasOwnProperty(i) && !usedWordIdx.has(i));
   });
 }
 function onWordTap(idx){
   if(!awaitingSel) return;
-  if(usedWordIdx.has(idx)){ fb("That phrase is already used. Pick a different part.",false); return; }
-  if(pendingStart===null){ pendingStart=idx; refreshWords(); setSelPrompt(); return; }
-  const a=Math.min(pendingStart,idx), b=Math.max(pendingStart,idx);
-  pendingStart=null; refreshWords(); setSelPrompt();
-  for(let k=a;k<=b;k++) if(usedWordIdx.has(k)){ fb("That overlaps a phrase you've already used. Pick a different part.",false); return; }
-  finalizeSelection(cleanSel(words.slice(a,b+1).join(' ')), a, b);
+  if(!liveByWord.hasOwnProperty(idx)){
+    fb("Tap one of the highlighted phrases. Those are the ones loaded with feedback in this builder. (Plenty of other phrases in the passage are worth analysing too, but they are not built into this exercise.)",false);
+    return;
+  }
+  const ti=liveByWord[idx];
+  if(usedTargets.has(ti)){ fb("You have already analysed that phrase. Tap a different highlighted one.",false); return; }
+  const r=liveRange[ti];
+  finalizeSelection(cleanSel(words.slice(r.a,r.b+1).join(' ')), r.a, r.b);
 }
 var lastSel=null;
 function finalizeSelection(txt,a,b){
   var maxW=8; P.targets.forEach(function(t){ var w=t.quote.split(/\s+/).length; if(w+3>maxW) maxW=w+3; });
   if((b-a+1) > maxW){ fb("That is too much to analyse at once. Select a single phrase (just a few words).",false); return; }
   const ti=matchTarget(txt);
-  if(ti<0){ fb("That isn't one of the key language choices here. Try a word or phrase that creates the effect.",false); return; }
+  if(ti<0){ fb("Tap one of the highlighted phrases. Those are the ones loaded with feedback here.",false); return; }
   if(usedTargets.has(ti)){ fb("You've already analysed that phrase. Choose a different one.",false); return; }
   if(usedRanges.some(r=> !(b<r.s || a>r.e))){ fb("That overlaps a phrase you've already used.",false); return; }
   awaitingSel=false; $('passage').classList.remove('selecting');
@@ -6273,14 +6287,8 @@ function askPhrase(){
 }
 function setSelPrompt(){
   const el=$('selprompt'); if(!el) return;
-  if(pendingStart===null){
-    el.innerHTML=`<strong>${SLOT[slot]}</strong>: tap the <b>first word</b> of the phrase you want to analyse.
-      <small>Pick one word (like “groaned”), a short phrase, or a whole sentence.</small>`;
-  }else{
-    el.innerHTML=`Now tap the <b>last word</b> of your phrase, or tap the same word again for just that one.
-      <button class="mini" id="restartSel">↺ start over</button>`;
-    const r=$('restartSel'); if(r) r.onclick=()=>{ pendingStart=null; refreshWords(); setSelPrompt(); };
-  }
+  el.innerHTML=`<strong>${SLOT[slot]}</strong>: tap one of the <b>highlighted phrases</b> in the passage to analyse it.
+    <small>These are the phrases this builder has model feedback for.</small>`;
 }
 function fb(msg,ok){ const el=$('fb'); if(el){ el.textContent=msg; el.className='feedback '+(ok?'ok':'no'); } }
 
