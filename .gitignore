@@ -1,3 +1,12 @@
+# Local-only dev/authoring files (kept off the public repo)
+CLAUDE.md
+SPEC.md
+validate.ps1
+serve.ps1
+
+# Scratch / work-in-progress
+Temp/
+
 # OS / editor cruft
 Thumbs.db
 ehthumbs.db

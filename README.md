@@ -15,12 +15,6 @@ The whole thing is one self-contained `index.html` (the logo is embedded; no ext
 
 ## Run locally
 
-Open `index.html` in a browser, or serve the folder:
+Open `index.html` in any modern browser. There is no build step.
 
-```
-pwsh ./serve.ps1   # http://localhost:8765
-```
-
-## Editing the content
-
-`SPEC.md` is the authoring spec and standards; `validate.ps1` checks the content banks for errors; `CLAUDE.md` holds build instructions. The app's content is original (no copyrighted exam material).
+The app's content is entirely original (no copyrighted exam material).

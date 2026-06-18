@@ -7307,6 +7307,7 @@ function examPhraseCard(kp,cov){
     <div class="pmeta"><b>Literal (Move 1):</b> ${esc(kp.literal)}</div>
     <div class="pmeta"><b>Implied (Move 2):</b> ${esc(kp.implied)}</div></div>`;
 }
+function examFix(ok, fn, label){ return ok ? '' : ' <button class="glink examfix" onclick="'+fn+'">Practise this in '+esc(label)+' →</button>'; }
 function examSubmit(){
   if(examTimer){ clearInterval(examTimer); examTimer=null; }
   var text=$('examInput')?$('examInput').value:'';
@@ -7321,12 +7322,12 @@ function examSubmit(){
   var html=refBlock(t.id.toUpperCase())+`<div class="fbcard"><h3>1. Your language choices</h3>${coverMsg}</div>`;
   if(r.covered.length){ html+=`<div class="fbcard"><h3>2. Model analysis of the phrases you chose</h3><p class="sub">Compare your own comments against these. Did your implied meaning (Move 2) go this deep?</p>${r.covered.map(function(kp){return examPhraseCard(kp,true);}).join('')}</div>`; }
   if(r.missed.length){ html+=`<div class="fbcard"><h3>Other strong choices you could have analysed</h3>${r.missed.map(function(kp){return examPhraseCard(kp,false);}).join('')}</div>`; }
-  html+=`<div class="fbcard"><h3>3. Structure check</h3><ul class="examcheck">
-    <li>${ck(r.quotes>=3)} Quoted at least three precise phrases from the extract</li>
-    <li>${ck(r.technique>=1)} Named a technique or word class for your choices</li>
-    <li>${ck(r.literal)} Explained the literal meaning (Move 1: refers to...)</li>
-    <li>${ck(r.implied)} Went beyond literal to the implied meaning and effect (Move 2). <b>This is the band 4 to 5 move.</b></li>
-    <li>${ck(r.tentative)} Used tentative, effect-focused language (suggests, implies)</li>
+  html+=`<div class="fbcard"><h3>3. Structure check</h3><p class="sub">Where a box is not ticked, tap the link to go and practise that skill.</p><ul class="examcheck">
+    <li>${ck(r.quotes>=3)} Quoted at least three precise phrases from the extract${examFix(r.quotes>=3,'showTechTrainer()','Identifying techniques')}</li>
+    <li>${ck(r.technique>=1)} Named a technique or word class for your choices${examFix(r.technique>=1,'showTechTrainer()','Identifying techniques')}</li>
+    <li>${ck(r.literal)} Explained the literal meaning (Move 1: refers to...)${examFix(r.literal,'showTrainer()','Explicit and implied meaning')}</li>
+    <li>${ck(r.implied)} Went beyond literal to the implied meaning and effect (Move 2). <b>This is the band 4 to 5 move.</b>${examFix(r.implied,'showTrainer()','Explicit and implied meaning')}</li>
+    <li>${ck(r.tentative)} Used tentative, effect-focused language (suggests, implies)${examFix(r.tentative,'showStrategy()','Exam strategy')}</li>
     <li>${ck(r.words>=180&&r.words<=280)} Length about 200 to 250 words (you wrote ${r.words})</li>
   </ul></div>`;
   html+=`<div class="fbcard"><h3>4. Mark your own answer</h3><p class="sub">The app cannot judge these, so be honest with yourself:</p><ul class="examcheck self">
