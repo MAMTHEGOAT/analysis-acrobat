@@ -6063,6 +6063,25 @@ const norm = s => s.toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' '
 const cleanSel = s => s.trim().replace(/^[\s"'.,;:]+|[\s"'.,;:]+$/g,'');
 
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+/* Session no-repeat picker (a "shuffle bag"): deals out every index of a bank in
+   random order, only reshuffling once the whole bank has been shown, and never
+   repeating an item across the reshuffle boundary. Each bank is keyed by `name`.
+   Bags live in memory only, so they reset on page reload (per session, per device). */
+var PICK_BAGS={}, PICK_LAST={};
+function pickNoRepeat(name, length){
+  if(length<=1) return 0;
+  var bag=PICK_BAGS[name];
+  if(!bag || !bag.length){
+    var arr=[]; for(var i=0;i<length;i++) arr.push(i);
+    bag=shuffle(arr);
+    var last=PICK_LAST[name];
+    if(last!=null && bag[bag.length-1]===last){ var t=bag[bag.length-1]; bag[bag.length-1]=bag[0]; bag[0]=t; }
+    PICK_BAGS[name]=bag;
+  }
+  var idx=bag.pop();
+  PICK_LAST[name]=idx;
+  return idx;
+}
 function jac(a,b){
   const A=new Set(norm(a).split(' ').filter(Boolean)), B=new Set(norm(b).split(' ').filter(Boolean));
   let inter=0; A.forEach(w=>{if(B.has(w))inter++;});
@@ -6305,7 +6324,7 @@ function startLevel(n){
   $('trainLevelLabel').textContent='Level '+n+' · '+['Build the pair','Select','Real or reworded?','Classify'][n-1];
   nextTrain();
 }
-function nextTrain(){ trainIdx=Math.floor(Math.random()*TRAIN_ITEMS.length); trainItem=TRAIN_ITEMS[trainIdx]; renderTrain(); window.scrollTo(0, $('trainPanel').offsetTop-10); }
+function nextTrain(){ trainIdx=pickNoRepeat('train', TRAIN_ITEMS.length); trainItem=TRAIN_ITEMS[trainIdx]; renderTrain(); window.scrollTo(0, $('trainPanel').offsetTop-10); }
 function phraseBox(p){ return '<div class="phrase-box">“'+esc(p)+'”</div>'; }
 function tfeed(msg,ok){ var el=$('tfb'); if(el){ el.textContent=msg; el.className='feedback '+(ok?'ok':'no'); } }
 function trainWhyNext(){
@@ -6515,7 +6534,7 @@ var imgFilter='all', imgState=null, IMG_LAST=-1;
 function showImagery(){ showScreen('imagery'); showSkipBar(false); window.scrollTo(0,0); $('imagery-panel').style.display='none'; imgSetActive(''); }
 function imgSetActive(f){ document.querySelectorAll('#imagery .lvl-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.f===f); }); }
 function imgPool(f){ return IMAGERY_ITEMS.filter(function(it){ return f==='all'||it.type===f; }); }
-function imgPick(f){ var pool=imgPool(f); if(pool.length===1) return pool[0]; var c; do{ c=pool[Math.floor(Math.random()*pool.length)]; }while(c.id===IMG_LAST && pool.length>1); IMG_LAST=c.id; return c; }
+function imgPick(f){ var pool=imgPool(f); if(pool.length<=1) return pool[0]; return pool[pickNoRepeat('img:'+f, pool.length)]; }
 function startImagery(f){ imgFilter=f; imgSetActive(f); $('imagery-panel').style.display='block'; nextImagery(); }
 function nextImagery(){ imgState={item:imgPick(imgFilter), step:1, vehOK:false, tenOK:false}; renderImagery(); var p=$('imagery-panel'); if(p) window.scrollTo(0, p.offsetTop-10); }
 function imgfb(msg,ok){ var el=$('imgfb'); if(el){ el.textContent=msg; el.className='feedback '+(ok?'ok':'no'); } }
@@ -6649,7 +6668,7 @@ function wireTechNames(correct, why){
   };});
 }
 function renderTechL1(){
-  var t=techPick(TECHNIQUES); techIdx=TECHNIQUES.indexOf(t);
+  techIdx=pickNoRepeat('techL1', TECHNIQUES.length); var t=TECHNIQUES[techIdx];
   var defs=shuffle(TECHNIQUES.filter(function(x){return x.name!==t.name;})).slice(0,3).map(function(x){return x.def;});
   var opts=shuffle(defs.concat([t.def]));
   $('techArea').innerHTML=refBlock('TD-'+(techIdx+1))+'<div class="train-q">Which is the correct definition of <b>'+esc(t.name)+'</b>?</div>'
@@ -6658,7 +6677,7 @@ function renderTechL1(){
   wireTechNames(t.def, '<b>'+esc(t.name)+':</b> '+esc(t.def));
 }
 function renderTechL2(){
-  var e=techPick(TECH_EXAMPLES); techIdx=TECH_EXAMPLES.indexOf(e);
+  techIdx=pickNoRepeat('techL2', TECH_EXAMPLES.length); var e=TECH_EXAMPLES[techIdx];
   var others=shuffle(techNames().filter(function(n){return n!==e.technique;})).slice(0,3);
   var opts=shuffle(others.concat([e.technique]));
   $('techArea').innerHTML=refBlock('TX-'+(techIdx+1))+'<div class="train-q">Which technique is the highlighted part?</div>'
@@ -6668,7 +6687,7 @@ function renderTechL2(){
   wireTechNames([e.technique].concat(e.alt||[]), '<b>'+esc(e.technique)+':</b> '+esc(e.why));
 }
 function renderTechL3(){
-  var p=techPick(SPOT_PASSAGES); techIdx=SPOT_PASSAGES.indexOf(p);
+  techIdx=pickNoRepeat('techL3', SPOT_PASSAGES.length); var p=SPOT_PASSAGES[techIdx];
   var present=[]; p.items.forEach(function(it){ if(present.indexOf(it.technique)<0) present.push(it.technique); });
   var T=techPick(present);
   var chips=shuffle(p.items.slice());
@@ -6698,7 +6717,7 @@ function checkTechL3(){
   techWhyNext('<b>'+esc(T)+' in this passage:</b> '+corr+note);
 }
 function renderTechL4(){
-  var pair=techPick(TECH_PAIRS), A=pair[0], B=pair[1];
+  var pair=TECH_PAIRS[pickNoRepeat('techL4', TECH_PAIRS.length)], A=pair[0], B=pair[1];
   var exA=shuffle(TECH_EXAMPLES.filter(function(e){return e.technique===A;})).slice(0,3);
   var exB=shuffle(TECH_EXAMPLES.filter(function(e){return e.technique===B;})).slice(0,3);
   var items=shuffle(exA.concat(exB));
