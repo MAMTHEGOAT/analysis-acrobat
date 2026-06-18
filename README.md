@@ -2,7 +2,7 @@
 
 A single-file browser app for practising **Cambridge IGCSE First Language English (0500)** extended language analysis — Paper 1, Question 3(d) (pre-2027: Question 2(d)). Built around the house "3D" analysis scaffold (opening effect → three ideas, each with a technique, a literal *Move 1* and an implied *Move 2*).
 
-**Live app:** _https://USERNAME.github.io/analysis-acrobat/_ (fill in once GitHub Pages is enabled)
+**Live app:** <https://mamthegoat.github.io/analysis-acrobat/>
 
 ## What it does
 
