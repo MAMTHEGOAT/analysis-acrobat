@@ -28,10 +28,6 @@
   .word:hover{background:#f1ecff;}
   .word.pending{background:#ddd6fe;outline:1px solid var(--accent);}
   .word.used{background:var(--mark);}
-  .word.live{background:#cfe8fb;box-shadow:inset 0 -2px 0 #2f86c5;}
-  .word.live:hover{background:#aed6f5;}
-  .passage.selecting .word:not(.live){cursor:default;}
-  .passage.selecting .word:not(.live):hover{background:transparent;}
   .draft{font-size:18px;line-height:1.95;min-height:30px;}
   .draft p{margin:0 0 10px;}
   .blank{display:inline-block;min-width:26px;border-bottom:2px solid var(--accent);color:var(--accent);font-family:system-ui,sans-serif;font-size:13px;padding:0 6px;opacity:.8;}
@@ -6209,26 +6205,26 @@ function refreshWords(){
   wordEls.forEach((el,i)=>{
     el.classList.toggle('used', usedWordIdx.has(i));
     el.classList.toggle('pending', pendingStart===i);
-    el.classList.toggle('live', awaitingSel && liveByWord.hasOwnProperty(i) && !usedWordIdx.has(i));
   });
 }
 function onWordTap(idx){
   if(!awaitingSel) return;
-  if(!liveByWord.hasOwnProperty(idx)){
-    fb("Tap one of the highlighted phrases. Those are the ones loaded with feedback in this builder. (Plenty of other phrases in the passage are worth analysing too, but they are not built into this exercise.)",false);
+  if(pendingStart===null){
+    if(usedWordIdx.has(idx)) return;
+    pendingStart=idx; refreshWords();
+    fb("Now tap the last word of the phrase (or tap the same word again to choose just one word).",false);
     return;
   }
-  const ti=liveByWord[idx];
-  if(usedTargets.has(ti)){ fb("You have already analysed that phrase. Tap a different highlighted one.",false); return; }
-  const r=liveRange[ti];
-  finalizeSelection(cleanSel(words.slice(r.a,r.b+1).join(' ')), r.a, r.b);
+  const a=Math.min(pendingStart,idx), b=Math.max(pendingStart,idx);
+  pendingStart=null; refreshWords();
+  finalizeSelection(cleanSel(words.slice(a,b+1).join(' ')), a, b);
 }
 var lastSel=null;
 function finalizeSelection(txt,a,b){
   var maxW=8; P.targets.forEach(function(t){ var w=t.quote.split(/\s+/).length; if(w+3>maxW) maxW=w+3; });
   if((b-a+1) > maxW){ fb("That is too much to analyse at once. Select a single phrase (just a few words).",false); return; }
   const ti=matchTarget(txt);
-  if(ti<0){ fb("Tap one of the highlighted phrases. Those are the ones loaded with feedback here.",false); return; }
+  if(ti<0){ fb("Not quite. This builder only has model feedback for a few key phrases. Look for the writer's most striking language (a metaphor, simile, personification or powerful verb) and select just those words.",false); return; }
   if(usedTargets.has(ti)){ fb("You've already analysed that phrase. Choose a different one.",false); return; }
   if(usedRanges.some(r=> !(b<r.s || a>r.e))){ fb("That overlaps a phrase you've already used.",false); return; }
   awaitingSel=false; $('passage').classList.remove('selecting');
@@ -6287,8 +6283,8 @@ function askPhrase(){
 }
 function setSelPrompt(){
   const el=$('selprompt'); if(!el) return;
-  el.innerHTML=`<strong>${SLOT[slot]}</strong>: tap one of the <b>highlighted phrases</b> in the passage to analyse it.
-    <small>These are the phrases this builder has model feedback for.</small>`;
+  el.innerHTML=`<strong>${SLOT[slot]}</strong>: find a phrase where the writer uses an interesting technique, then tap its <b>first word</b> and its <b>last word</b> to select it.
+    <small>Look for a vivid image, a comparison or a powerful word.</small>`;
 }
 function fb(msg,ok){ const el=$('fb'); if(el){ el.textContent=msg; el.className='feedback '+(ok?'ok':'no'); } }
 
