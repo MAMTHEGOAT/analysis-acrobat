@@ -6816,7 +6816,367 @@ var IMAGERY_ITEMS=[
       {q:"has a mouth and a stomach", why:"a swallowing creature has a body, but the fog does not; only the way it makes things disappear transfers."},
       {q:"eats because it is hungry", why:"a creature swallows for food, but the fog has no hunger; only the engulfing effect carries over."}
     ],
-    model:"Saying the fog “swallowed the houses” treats it as a great monster, making the houses seem to vanish completely and silently as the thick fog engulfs them." }
+    model:"Saying the fog “swallowed the houses” treats it as a great monster, making the houses seem to vanish completely and silently as the thick fog engulfs them." },
+  { id:37, type:"Simile", text:"The detective's mind was as sharp as a razor during the interrogation.",
+    tenorLabel:"the detective's mind", tenorMark:"mind", tenMore:["the interrogation","the razor"],
+    vehicleLabel:"a razor", vehicleMark:"razor", vehMore:["sharp","the detective"],
+    transfer:["quick and incisive","precise and accurate","cutting through confusion","able to make fine distinctions"],
+    decoys:[
+      {q:"made of cold steel", why:"a razor is metal, but the detective's mind is not literally metallic, so this does not carry over."},
+      {q:"dull and blunt", why:"the opposite of a razor; the comparison stresses sharpness, not bluntness."},
+      {q:"used for shaving", why:"a true purpose of a razor, but it has nothing to do with how a mind thinks."}
+    ],
+    model:"Describing the mind as sharp as a razor suggests it works quickly and precisely, slicing through lies and confusion to expose the truth with cutting accuracy." },
+  { id:38, type:"Simile", text:"Her temper flared like a struck match in the crowded kitchen.",
+    tenorLabel:"her temper", tenorMark:"temper", tenMore:["the kitchen","the match"],
+    vehicleLabel:"a struck match", vehicleMark:"struck match", vehMore:["flared","the crowd"],
+    transfer:["sudden and instant","fierce and hot","easily ignited","flaring up without warning"],
+    decoys:[
+      {q:"quickly burns out", why:"a match dies fast, but the sentence captures the flaring up, not the fading, so this does not transfer."},
+      {q:"small and harmless", why:"a single match seems minor, yet the image stresses sudden fire, not harmlessness."},
+      {q:"made of wood and phosphorus", why:"a true fact about matches, but irrelevant to how her anger behaves."}
+    ],
+    model:"Comparing her temper to a struck match shows how instantly and fiercely it ignites, blazing up the moment it is provoked, sudden, hot and impossible to ignore." },
+  { id:39, type:"Simile", text:"The abandoned house stood as silent as a tomb at the end of the lane.",
+    tenorLabel:"the abandoned house", tenorMark:"house", tenMore:["the lane","the tomb"],
+    vehicleLabel:"a tomb", vehicleMark:"tomb", vehMore:["silent","abandoned"],
+    transfer:["utterly quiet and still","empty of life","cold and lifeless","eerie and unsettling"],
+    decoys:[
+      {q:"made of carved stone", why:"tombs are stone, but the house is not described as stone, so this detail does not carry over."},
+      {q:"full of noise and chatter", why:"the opposite of a tomb; the comparison stresses deep silence, not noise."},
+      {q:"holds buried treasure", why:"some tombs contain treasure, but that idea tells us nothing about the empty house."}
+    ],
+    model:"Calling the house as silent as a tomb suggests it is utterly still and lifeless, drained of all sound and movement, leaving an eerie, unsettling sense of death and abandonment." },
+  { id:40, type:"Simile", text:"The toddler darted across the playground like a startled rabbit.",
+    tenorLabel:"the toddler", tenorMark:"toddler", tenMore:["the playground","the rabbit"],
+    vehicleLabel:"a startled rabbit", vehicleMark:"startled rabbit", vehMore:["darted","the playground"],
+    transfer:["quick and sudden","nervous and jumpy","small and light on its feet","unpredictable in direction"],
+    decoys:[
+      {q:"has long ears and fur", why:"true of a rabbit's body, but the toddler does not share these features, so they do not transfer."},
+      {q:"slow and lumbering", why:"the opposite of a startled rabbit; the image stresses speed and suddenness."},
+      {q:"lives in a burrow underground", why:"a real fact about rabbits, but it says nothing about how the toddler moves."}
+    ],
+    model:"Comparing the toddler to a startled rabbit captures the sudden, darting speed of the child, small, nervous and quick, changing direction in an instant just as a frightened rabbit bolts." },
+  { id:41, type:"Simile", text:"His old coat was as thin as paper after years of constant wear.",
+    tenorLabel:"his old coat", tenorMark:"coat", tenMore:["the years","the paper"],
+    vehicleLabel:"paper", vehicleMark:"paper", vehMore:["thin","worn"],
+    transfer:["very thin and flimsy","easily torn","offering little warmth","worn down and fragile"],
+    decoys:[
+      {q:"covered in printed words", why:"paper often has writing, but the coat carries no text, so this does not carry over."},
+      {q:"thick and heavily padded", why:"the opposite of paper; the comparison stresses thinness, not bulk."},
+      {q:"made from wood pulp", why:"a true fact about how paper is made, but irrelevant to the worn-out coat."}
+    ],
+    model:"Describing the coat as thin as paper suggests it is worn dangerously flimsy, fragile and easily torn, offering almost no warmth after years of constant, wearing use." },
+  { id:42, type:"Simile", text:"The market square was as packed as a tin of sardines on Saturday morning.",
+    tenorLabel:"the market square", tenorMark:"square", tenMore:["Saturday morning","the sardines"],
+    vehicleLabel:"a tin of sardines", vehicleMark:"tin of sardines", vehMore:["packed","the market"],
+    transfer:["tightly crammed together","crowded with no space","bodies pressed close","stifling and airless"],
+    decoys:[
+      {q:"smells strongly of fish", why:"a real fact about sardines, but the crowded square does not smell of fish, so this does not transfer."},
+      {q:"nearly empty and roomy", why:"the opposite of a packed tin; the image stresses being crammed, not spacious."},
+      {q:"sealed shut with a metal lid", why:"true of a sardine tin, but irrelevant to an open-air market square."}
+    ],
+    model:"Comparing the square to a tin of sardines suggests it is crammed with bodies pressed tightly together, leaving no space to move, hot, airless and uncomfortably crowded with people." },
+  { id:43, type:"Simile", text:"The old professor's voice was as dry as dust during the afternoon lecture.",
+    tenorLabel:"the professor's voice", tenorMark:"voice", tenMore:["the lecture","the dust"],
+    vehicleLabel:"dust", vehicleMark:"dust", vehMore:["dry","the professor"],
+    transfer:["dull and lifeless","lacking warmth or feeling","tiring to listen to","flat and monotonous"],
+    decoys:[
+      {q:"floats in the air", why:"real dust drifts in the air, but a voice does not float, so this fact does not transfer."},
+      {q:"lively and full of energy", why:"the opposite of dry dust; the comparison stresses dullness, not vitality."},
+      {q:"gathers on old furniture", why:"a true fact about dust, but it tells us nothing about how the voice sounds."}
+    ],
+    model:"Describing the voice as dry as dust suggests it is dull, flat and lifeless, drained of all warmth and feeling, making the lecture tedious and tiring to sit through." },
+  { id:44, type:"Simile", text:"The diver slipped into the harbour as smoothly as an otter leaving the bank.",
+    tenorLabel:"the diver", tenorMark:"diver", tenMore:["the harbour","the otter"],
+    vehicleLabel:"an otter", vehicleMark:"otter", vehMore:["smoothly","the bank"],
+    transfer:["graceful and fluid","effortless in the water","sleek and controlled","at ease entering the water"],
+    decoys:[
+      {q:"has thick brown fur", why:"true of an otter's body, but the diver does not share this feature, so it does not carry over."},
+      {q:"clumsy and splashing", why:"the opposite of a smooth otter; the image stresses graceful ease, not awkwardness."},
+      {q:"eats fish and shellfish", why:"a real fact about otters' diet, but it says nothing about how the diver moves."}
+    ],
+    model:"Comparing the diver to an otter suggests a graceful, effortless entry into the water, sleek and controlled, slipping below the surface with the same fluid ease an otter shows." },
+  { id:45, type:"Simile", text:"The boxer's fist landed like a hammer in the final round.",
+    tenorLabel:"the boxer's fist", tenorMark:"fist", tenMore:["the final round","the hammer"],
+    vehicleLabel:"a hammer", vehicleMark:"hammer", vehMore:["landed","the boxer"],
+    transfer:["heavy and forceful","striking with great power","sudden and jarring","capable of real damage"],
+    decoys:[
+      {q:"made of wood and steel", why:"a hammer is built from these, but the fist is flesh, so the materials do not transfer."},
+      {q:"soft and gentle", why:"the opposite of a hammer's blow; the comparison stresses crushing force, not gentleness."},
+      {q:"used to drive in nails", why:"a true purpose of a hammer, but irrelevant to a punch thrown in a boxing ring."}
+    ],
+    model:"Comparing the fist to a hammer suggests each punch lands with heavy, crushing force, sudden and jarring, hitting hard enough to do real damage just as a hammer pounds a nail." },
+  { id:46, type:"Simile", text:"The new recruit was as green as spring grass on his very first day.",
+    tenorLabel:"the new recruit", tenorMark:"recruit", tenMore:["the first day","the grass"],
+    vehicleLabel:"spring grass", vehicleMark:"spring grass", vehMore:["the uniform","the parade ground"],
+    transfer:["inexperienced and untrained","new and fresh to the job","naive and untested","still learning the basics"],
+    decoys:[
+      {q:"is literally the colour green", why:"grass is green in colour, but the recruit is not actually green, so the colour does not transfer."},
+      {q:"seasoned and highly experienced", why:"the opposite of green; the comparison stresses inexperience, not expertise."},
+      {q:"needs rain and sunlight to grow", why:"a true fact about real grass, but it tells us nothing about the recruit's skill."}
+    ],
+    model:"Calling the recruit as green as spring grass suggests he is fresh, inexperienced and untested, new to the work and still learning every basic, with much to prove and discover." },
+  { id:47, type:"Simile", text:"The little boat bobbed on the waves like a cork in a stream.",
+    tenorLabel:"the little boat", tenorMark:"boat", tenMore:["the waves","the cork"],
+    vehicleLabel:"a cork", vehicleMark:"cork", vehMore:["bobbed","the stream"],
+    transfer:["light and buoyant","tossed about helplessly","floating without control","at the mercy of the water"],
+    decoys:[
+      {q:"seals the neck of a bottle", why:"a real use of a cork, but the bobbing boat has nothing to do with bottles, so it does not transfer."},
+      {q:"heavy and sinking fast", why:"the opposite of a floating cork; the image stresses buoyancy, not sinking."},
+      {q:"comes from the bark of a tree", why:"true of how cork is made, but irrelevant to the boat on the waves."}
+    ],
+    model:"Comparing the boat to a cork suggests it is light and helpless on the water, bobbing and tossed about without control, drifting wherever the restless waves choose to carry it." },
+  { id:48, type:"Simile", text:"The exam hall fell as quiet as a library when the papers were handed out.",
+    tenorLabel:"the exam hall", tenorMark:"exam hall", tenMore:["the papers","the library"],
+    vehicleLabel:"a library", vehicleMark:"library", vehMore:["the corridor","the teacher"],
+    transfer:["hushed and still","calm and focused","free of chatter","tense with concentration"],
+    decoys:[
+      {q:"is full of borrowed books", why:"a library holds books, but the exam hall does not, so this fact does not carry over."},
+      {q:"loud and full of chatter", why:"the opposite of a quiet library; the comparison stresses silence, not noise."},
+      {q:"has a librarian stamping dates", why:"a true detail of real libraries, but irrelevant to the silent exam hall."}
+    ],
+    model:"Comparing the exam hall to a library suggests a deep, focused hush falling over the room, every student silent and concentrating, the air tense and still as pens begin to move." },
+  { id:49, type:"Metaphor", text:"The library was a cathedral.",
+    tenorLabel:"the library", tenorMark:"library", tenMore:["the museum","the bookshop"],
+    vehicleLabel:"a cathedral", vehicleMark:"cathedral", vehMore:["a stadium","a warehouse"],
+    transfer:["hushed and silent","grand and tall","awe-inspiring","a place of quiet respect"],
+    decoys:[
+      {q:"used for worship", why:"a real cathedral hosts religious services, but the library is for reading, not prayer."},
+      {q:"crowded and noisy", why:"the opposite of a cathedral's stillness, so it cannot transfer."},
+      {q:"made of ancient stone", why:"true of many cathedrals, but the library's building material is not the point being made."}
+    ],
+    model:"Naming the library a cathedral makes it feel vast, hushed and solemn, a place readers enter with quiet awe and respect, as though learning itself were sacred." },
+  { id:50, type:"Metaphor", text:"Her bedroom was a pigsty.",
+    tenorLabel:"her bedroom", tenorMark:"bedroom", tenMore:["the kitchen","her wardrobe"],
+    vehicleLabel:"a pigsty", vehicleMark:"pigsty", vehMore:["a palace","a cupboard"],
+    transfer:["filthy and dirty","cluttered and messy","smelly and unpleasant","neglected and uncared for"],
+    decoys:[
+      {q:"home to actual pigs", why:"a real pigsty houses animals, but her bedroom holds a person, not livestock."},
+      {q:"spotless and tidy", why:"the opposite of a pigsty, so this quality cannot carry over."},
+      {q:"built outdoors on a farm", why:"true of a literal pigsty's location, but irrelevant to a bedroom inside a house."}
+    ],
+    model:"Calling her bedroom a pigsty suggests it is filthy, cluttered and smelly, so neglected that it feels fit for animals rather than for a person to live in." },
+  { id:51, type:"Metaphor", text:"The exam hall was a furnace.",
+    tenorLabel:"the exam hall", tenorMark:"exam hall", tenMore:["the timetable","the exam paper"],
+    vehicleLabel:"a furnace", vehicleMark:"furnace", vehMore:["a freezer","a chimney"],
+    transfer:["unbearably hot","stifling and airless","intense and uncomfortable","draining and exhausting"],
+    decoys:[
+      {q:"made of thick iron", why:"a real furnace is built of metal, but the hall's material is not what the image stresses."},
+      {q:"cold and refreshing", why:"the opposite of a furnace's heat, so it cannot transfer."},
+      {q:"used to melt metal", why:"true of an industrial furnace's purpose, but irrelevant to a room full of students."}
+    ],
+    model:"Describing the exam hall as a furnace stresses its stifling, draining heat, suggesting students are slowly worn down by an oppressive atmosphere as much as by the exam itself." },
+  { id:52, type:"Metaphor", text:"The new recruit was a sponge.",
+    tenorLabel:"the new recruit", tenorMark:"recruit", tenMore:["the trainer","the rulebook"],
+    vehicleLabel:"a sponge", vehicleMark:"sponge", vehMore:["a brick","a mirror"],
+    transfer:["quick to absorb information","eager to take everything in","soaks up new skills","retains what is learned"],
+    decoys:[
+      {q:"used to wash dishes", why:"a real sponge cleans surfaces, but the recruit is learning, not scrubbing."},
+      {q:"unable to hold anything in", why:"the opposite of an absorbent sponge, so it cannot transfer."},
+      {q:"full of tiny holes", why:"true of a sponge's texture, but this physical detail tells us nothing about the recruit."}
+    ],
+    model:"Calling the new recruit a sponge suggests he absorbs knowledge quickly and eagerly, soaking up every new skill and instruction so that little is lost and much is retained." },
+  { id:53, type:"Metaphor", text:"The motorway was a river of steel.",
+    tenorLabel:"the motorway", tenorMark:"motorway", tenMore:["the traffic lights","the petrol station"],
+    vehicleLabel:"a river", vehicleMark:"river", vehMore:["a car park","a bridge"],
+    transfer:["flowing steadily onward","long and winding","constantly moving","carrying everything along its course"],
+    decoys:[
+      {q:"full of fish and water", why:"a real river holds water and wildlife, but the motorway carries cars, not fish."},
+      {q:"completely still and frozen", why:"the opposite of a flowing river, so it cannot transfer."},
+      {q:"used for swimming in summer", why:"true of many rivers, but irrelevant to a road built for traffic."}
+    ],
+    model:"Picturing the motorway as a river of steel suggests an endless, flowing stream of cars, winding and constantly moving, carrying drivers along in one unstoppable current of metal." },
+  { id:54, type:"Metaphor", text:"His promise was an anchor.",
+    tenorLabel:"his promise", tenorMark:"promise", tenMore:["his apology","his handshake"],
+    vehicleLabel:"an anchor", vehicleMark:"anchor", vehMore:["a feather","a balloon"],
+    transfer:["steady and reliable","keeps her grounded","holds firm in hard times","a source of security"],
+    decoys:[
+      {q:"made of heavy iron", why:"a real anchor is forged from metal, but a promise has no physical material."},
+      {q:"easily drifts away", why:"the opposite of an anchor's holding power, so it cannot transfer."},
+      {q:"dropped to the seabed", why:"true of how an anchor is used at sea, but irrelevant to a spoken promise."}
+    ],
+    model:"Calling his promise an anchor suggests it is steady and dependable, holding her firm through difficult times and giving her a reassuring sense of security and stability." },
+  { id:55, type:"Metaphor", text:"The old factory was a skeleton.",
+    tenorLabel:"the old factory", tenorMark:"factory", tenMore:["the chimney","the machinery"],
+    vehicleLabel:"a skeleton", vehicleMark:"skeleton", vehMore:["a fortress","a garden"],
+    transfer:["bare and stripped back","lifeless and empty","only a frame remaining","a hollow reminder of the past"],
+    decoys:[
+      {q:"found inside a living body", why:"a real skeleton sits within flesh, but the factory is an abandoned building, not a creature."},
+      {q:"freshly built and complete", why:"the opposite of a stripped, ruined frame, so it cannot transfer."},
+      {q:"studied in biology lessons", why:"true of skeletons as a topic, but irrelevant to a derelict factory."}
+    ],
+    model:"Describing the old factory as a skeleton suggests it is bare and lifeless, just a hollow frame stripped of all activity, a haunting reminder of the busy life it once held." },
+  { id:56, type:"Metaphor", text:"The internet is a maze.",
+    tenorLabel:"the internet", tenorMark:"internet", tenMore:["the computer","the search bar"],
+    vehicleLabel:"a maze", vehicleMark:"maze", vehMore:["a ladder","a tunnel"],
+    transfer:["confusing and complicated","easy to get lost in","full of twists and dead ends","hard to find your way through"],
+    decoys:[
+      {q:"grown from tall green hedges", why:"true of a garden maze, but the internet is digital, not made of plants."},
+      {q:"simple and straightforward", why:"the opposite of a maze's complexity, so it cannot transfer."},
+      {q:"has a single fixed exit", why:"true of some mazes, but irrelevant to how endlessly the internet branches."}
+    ],
+    model:"Calling the internet a maze suggests it is confusing and tangled, full of twists and dead ends where users easily lose their way and struggle to find what they need." },
+  { id:57, type:"Metaphor", text:"The football pitch was a quagmire.",
+    tenorLabel:"the football pitch", tenorMark:"pitch", tenMore:["the goalposts","the referee"],
+    vehicleLabel:"a quagmire", vehicleMark:"quagmire", vehMore:["a desert","a beach"],
+    transfer:["wet and muddy","soft and clinging underfoot","slow and hard to move across","churned up and waterlogged"],
+    decoys:[
+      {q:"found deep in a wild swamp", why:"a real quagmire lies in marshland, but the pitch is a sports ground, not a wetland."},
+      {q:"dry, firm and dusty", why:"the opposite of a boggy quagmire, so it cannot transfer."},
+      {q:"home to frogs and reeds", why:"true of natural boggy ground, but irrelevant to a football pitch."}
+    ],
+    model:"Describing the pitch as a quagmire stresses how wet and muddy it has become, clinging to the players' boots and slowing every step so the game turns into a sluggish struggle." },
+  { id:58, type:"Metaphor", text:"Their friendship was a fortress.",
+    tenorLabel:"their friendship", tenorMark:"friendship", tenMore:["their argument","their secret"],
+    vehicleLabel:"a fortress", vehicleMark:"fortress", vehMore:["a tent","a window"],
+    transfer:["strong and unbreakable","protective and safe","able to withstand attack","solid and enduring"],
+    decoys:[
+      {q:"built from heavy grey stone", why:"a real fortress is made of stone, but a friendship has no physical walls."},
+      {q:"weak and easily broken into", why:"the opposite of a fortress's strength, so it cannot transfer."},
+      {q:"guarded by armed soldiers", why:"true of a military fortress, but irrelevant to a bond between friends."}
+    ],
+    model:"Calling their friendship a fortress suggests it is strong and protective, able to withstand any attack from outside, a safe and solid bond that endures whatever pressures come against it." },
+  { id:59, type:"Metaphor", text:"The shy boy was a shadow.",
+    tenorLabel:"the shy boy", tenorMark:"boy", tenMore:["the teacher","the playground"],
+    vehicleLabel:"a shadow", vehicleMark:"shadow", vehMore:["a spotlight","a statue"],
+    transfer:["quiet and barely noticed","always hovering at the edges","faint and easily overlooked","silently following others"],
+    decoys:[
+      {q:"cast only in bright sunlight", why:"a real shadow needs light to form, but this fact tells us nothing about the boy himself."},
+      {q:"loud and attention-grabbing", why:"the opposite of a faint, unnoticed shadow, so it cannot transfer."},
+      {q:"changes length through the day", why:"true of real shadows, but irrelevant to a shy boy's character."}
+    ],
+    model:"Calling the shy boy a shadow suggests he is quiet and barely noticed, lingering silently at the edges of every group, so faint a presence that others easily overlook him." },
+  { id:60, type:"Metaphor", text:"The old teacher's voice was gravel.",
+    tenorLabel:"the old teacher's voice", tenorMark:"voice", tenMore:["his lesson","his handwriting"],
+    vehicleLabel:"gravel", vehicleMark:"gravel", vehMore:["silk","a bell"],
+    transfer:["rough and harsh","gritty and grating","hard and coarse","worn and uneven"],
+    decoys:[
+      {q:"spread across garden paths", why:"real gravel covers driveways and paths, but a voice is sound, not stone chippings."},
+      {q:"smooth and soothing", why:"the opposite of gravel's roughness, so it cannot transfer."},
+      {q:"crunches loudly underfoot", why:"true of walking on gravel, but irrelevant to the sound of a speaking voice."}
+    ],
+    model:"Describing the teacher's voice as gravel suggests it is rough, harsh and gritty, a coarse and grating sound worn uneven by age, scraping at the ear like stones underfoot." },
+  { id:61, type:"Personification", text:"The old clock on the mantel counted every second with stubborn patience.",
+    tenorLabel:"the clock", tenorMark:"clock", tenMore:["the mantel","the second"],
+    vehicleLabel:"a patient, determined person", vehicleMark:"", vehMore:["a frightened child","a careless stranger"],
+    transfer:["calm and unhurried","steady and reliable","quietly determined","aware of passing time"],
+    decoys:[
+      {q:"feels bored and gives up", why:"the opposite; stubborn patience shows it keeps going, never quitting."},
+      {q:"has a beating heart", why:"a real patient person has a body, but only the calm, determined attitude transfers to the clock."},
+      {q:"can make its own choices", why:"a person decides what to do, but the clock cannot truly choose anything."}
+    ],
+    model:"Saying the clock counted with stubborn patience gives it a calm, determined human attitude, suggesting time moves on steadily and cannot be hurried or stopped by anyone." },
+  { id:62, type:"Personification", text:"The hungry sea swallowed the little fishing boat without mercy.",
+    tenorLabel:"the sea", tenorMark:"sea", tenMore:["the boat","the fishermen"],
+    vehicleLabel:"a merciless, devouring predator", vehicleMark:"", vehMore:["a generous host","a sleepy giant"],
+    transfer:["cruel and pitiless","powerful and unstoppable","greedy and destructive","frightening and alive"],
+    decoys:[
+      {q:"feels guilty afterwards", why:"the words give the sea no mercy, so it shows no regret or guilt at all."},
+      {q:"needs to eat to survive", why:"a hungry creature needs food, but the sea does not; only the greedy, destructive action transfers."},
+      {q:"is warm and welcoming", why:"the opposite; the sea here is cruel and dangerous, not inviting."}
+    ],
+    model:"Calling the sea hungry and saying it swallowed the boat treats it as a merciless predator, making it feel cruel, powerful and alive as it destroys without any pity." },
+  { id:63, type:"Personification", text:"The candle flame trembled nervously in the cold draught.",
+    tenorLabel:"the flame", tenorMark:"flame", tenMore:["the candle","the draught"],
+    vehicleLabel:"a frightened, anxious person", vehicleMark:"", vehMore:["a confident leader","a sleeping baby"],
+    transfer:["afraid and uneasy","fragile and vulnerable","easily disturbed","sensitive to danger"],
+    decoys:[
+      {q:"feels brave and bold", why:"the opposite; trembling nervously shows fear, not courage."},
+      {q:"can run away to hide", why:"a nervous person can flee, but the flame is fixed to the wick and cannot move away."},
+      {q:"has hands that shake", why:"a real nervous person shakes their body, but the flame has none; only the uneasy movement transfers."}
+    ],
+    model:"Saying the flame trembled nervously gives it human fear and fragility, suggesting it is weak and vulnerable, ready to be snuffed out by the smallest cold breath of air." },
+  { id:64, type:"Personification", text:"Morning sunlight tiptoed across the bedroom floor.",
+    tenorLabel:"the sunlight", tenorMark:"sunlight", tenMore:["the morning","the floor"],
+    vehicleLabel:"a quiet, gentle person sneaking in", vehicleMark:"", vehMore:["a stamping soldier","a roaring crowd"],
+    transfer:["gentle and careful","quiet and soft","slow and creeping","trying not to disturb"],
+    decoys:[
+      {q:"makes a loud noise", why:"the opposite; tiptoed suggests silence and care, not noise."},
+      {q:"has small bare feet", why:"a person tiptoes on feet, but the light has none; only the soft, careful movement transfers."},
+      {q:"feels nervous about being caught", why:"a sneaking person may fear discovery, but that worry does not fit the gentle sunlight here."}
+    ],
+    model:"Saying the sunlight tiptoed gives it the gentle, careful movement of a person sneaking in quietly, suggesting the light spreads softly and slowly without disturbing the calm of the room." },
+  { id:65, type:"Personification", text:"The stubborn lock refused to open for anyone that night.",
+    tenorLabel:"the lock", tenorMark:"lock", tenMore:["the night","the door"],
+    vehicleLabel:"a defiant, uncooperative person", vehicleMark:"", vehMore:["an eager helper","a tired servant"],
+    transfer:["unwilling and resistant","difficult and awkward","firmly defiant","frustratingly uncooperative"],
+    decoys:[
+      {q:"feels sorry for the trouble", why:"refused shows defiance, not regret; the lock offers no apology."},
+      {q:"has a mind that thinks", why:"a real stubborn person chooses to resist, but the lock cannot truly think or decide."},
+      {q:"happily agrees in the end", why:"the opposite; refused means it keeps resisting, not giving in."}
+    ],
+    model:"Saying the lock refused to open gives it the defiant will of a stubborn person, suggesting it actively resists and frustrates everyone, as if deliberately keeping its secrets shut away." },
+  { id:66, type:"Personification", text:"The autumn leaves chased each other playfully down the lane.",
+    tenorLabel:"the leaves", tenorMark:"leaves", tenMore:["the autumn","the lane"],
+    vehicleLabel:"playful, energetic children", vehicleMark:"", vehMore:["weary old workers","silent mourners"],
+    transfer:["lively and carefree","playful and joyful","full of energy","light and spirited"],
+    decoys:[
+      {q:"feels tired and heavy", why:"the opposite; chased playfully shows lightness and energy, not weariness."},
+      {q:"has legs to run with", why:"children chase on legs, but leaves have none; only the lively, playful movement transfers."},
+      {q:"argues over who wins", why:"real children competing might quarrel, but that idea does not fit the carefree leaves."}
+    ],
+    model:"Saying the leaves chased each other playfully treats them as joyful children at play, giving the scene a light, energetic mood as the wind tosses them about in a carefree dance." },
+  { id:67, type:"Personification", text:"The mountain stood guard over the sleeping village below.",
+    tenorLabel:"the mountain", tenorMark:"mountain", tenMore:["the village","the valley"],
+    vehicleLabel:"a watchful, protective guardian", vehicleMark:"", vehMore:["a careless wanderer","a cruel jailer"],
+    transfer:["protective and watchful","strong and reassuring","steady and dependable","quietly powerful"],
+    decoys:[
+      {q:"feels lonely on its own", why:"standing guard shows duty and strength, not loneliness or sadness."},
+      {q:"can walk its rounds", why:"a real guard patrols on foot, but the mountain stays fixed; only the watchful presence transfers."},
+      {q:"threatens the village with harm", why:"the opposite; a guard protects, so the mountain feels safe, not dangerous."}
+    ],
+    model:"Saying the mountain stood guard gives it the watchful, protective role of a loyal guardian, suggesting it towers reassuringly over the village and keeps the sleeping people safe through the night." },
+  { id:68, type:"Personification", text:"The greedy fire devoured the dry barn in minutes.",
+    tenorLabel:"the fire", tenorMark:"fire", tenMore:["the barn","the minutes"],
+    vehicleLabel:"a greedy, ravenous eater", vehicleMark:"", vehMore:["a patient gardener","a gentle nurse"],
+    transfer:["greedy and hungry","fast and destructive","unstoppable and consuming","wild and dangerous"],
+    decoys:[
+      {q:"feels full and stops eating", why:"the opposite; greedy and devoured show it consumes endlessly without stopping."},
+      {q:"has a stomach to fill", why:"a real eater has a body, but the fire has none; only the greedy, consuming action transfers."},
+      {q:"shares its food kindly", why:"a generous person shares, but the fire only takes and destroys here."}
+    ],
+    model:"Saying the greedy fire devoured the barn treats it as a ravenous eater, suggesting it consumes everything quickly and hungrily, making the blaze feel wild, destructive and impossible to satisfy." },
+  { id:69, type:"Personification", text:"The ancient floorboards complained loudly under every footstep.",
+    tenorLabel:"the floorboards", tenorMark:"floorboards", tenMore:["the footstep","the hallway"],
+    vehicleLabel:"a grumbling, irritable old person", vehicleMark:"", vehMore:["a cheerful singer","a silent statue"],
+    transfer:["irritable and grumpy","old and worn","unhappy at being disturbed","noisily protesting"],
+    decoys:[
+      {q:"laughs with delight", why:"the opposite; complained loudly shows annoyance, not joy."},
+      {q:"has a voice box", why:"a real grumbler speaks with a throat, but the boards have none; only the protesting sound transfers."},
+      {q:"can get up and leave", why:"an irritated person can walk off, but the floorboards are fixed in place."}
+    ],
+    model:"Saying the floorboards complained gives them the grumpy voice of an irritable old person, suggesting the house is aged and weary, protesting noisily at every step that disturbs its rest." },
+  { id:70, type:"Personification", text:"The thick darkness pressed against the windows, eager to get inside.",
+    tenorLabel:"the darkness", tenorMark:"darkness", tenMore:["the windows","the room"],
+    vehicleLabel:"a determined, threatening intruder", vehicleMark:"", vehMore:["a shy visitor","a helpful guide"],
+    transfer:["determined and pushing","threatening and unwelcome","eager and persistent","heavy and oppressive"],
+    decoys:[
+      {q:"waits politely to be invited", why:"the opposite; eager to get inside shows it pushes in, not waits politely."},
+      {q:"has hands to push with", why:"a real intruder pushes with arms, but darkness has none; only the pressing, eager force transfers."},
+      {q:"feels shy and hangs back", why:"a timid visitor holds back, but this darkness is bold and forceful instead."}
+    ],
+    model:"Saying the darkness pressed against the windows, eager to get inside, treats it as a threatening intruder, making the night feel alive, heavy and menacing as it tries to invade the safe, lit room." },
+  { id:71, type:"Personification", text:"The kettle shrieked impatiently from the kitchen.",
+    tenorLabel:"the kettle", tenorMark:"kettle", tenMore:["the kitchen","the stove"],
+    vehicleLabel:"an impatient, demanding person", vehicleMark:"", vehMore:["a calm listener","a sleepy guest"],
+    transfer:["impatient and demanding","loud and insistent","wanting attention now","easily worked up"],
+    decoys:[
+      {q:"waits quietly and calmly", why:"the opposite; shrieked impatiently shows noise and urgency, not calm."},
+      {q:"has lungs to scream with", why:"a real person shrieks using their voice, but the kettle has none; only the loud, urgent sound transfers."},
+      {q:"can choose to stay silent", why:"a person may decide to be quiet, but the kettle cannot truly choose anything."}
+    ],
+    model:"Saying the kettle shrieked impatiently gives it the loud, demanding manner of an impatient person, suggesting it urgently insists on attention, filling the kitchen with a sharp call that cannot be ignored." },
+  { id:72, type:"Personification", text:"The proud oak shrugged off the storm and stood firm till dawn.",
+    tenorLabel:"the oak", tenorMark:"oak", tenMore:["the storm","the dawn"],
+    vehicleLabel:"a proud, unshaken survivor", vehicleMark:"", vehMore:["a trembling coward","a weeping mourner"],
+    transfer:["proud and dignified","strong and resilient","calm under pressure","brave and unshaken"],
+    decoys:[
+      {q:"panics and falls apart", why:"the opposite; shrugged off and stood firm show calm strength, not panic."},
+      {q:"has shoulders to shrug", why:"a real person shrugs with shoulders, but the oak has none; only the proud, unbothered attitude transfers."},
+      {q:"begs the storm to stop", why:"a frightened person might plead, but the proud oak shows no fear or pleading here."}
+    ],
+    model:"Saying the proud oak shrugged off the storm gives it the calm dignity of a strong survivor, suggesting it stands firm and unafraid, treating even a fierce storm as a minor nuisance to ignore." }
 ];
 var imgFilter='all', imgState=null, IMG_LAST=-1;
 function showImagery(){ showScreen('imagery'); showSkipBar(false); window.scrollTo(0,0); $('imagery-panel').style.display='none'; imgSetActive(''); }
