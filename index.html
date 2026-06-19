@@ -473,6 +473,9 @@
   <section id="practice" class="screen" style="display:none">
     <button class="mini back" onclick="showSplash()">← Menu</button>
     <h2 class="screen-h">Building analytical paragraphs</h2>
+    <div id="practiceIntro" style="display:none"></div>
+
+    <div id="practiceMain">
     <div class="progress" id="progress"></div>
     <div class="ref" id="practiceRef"></div>
 
@@ -493,6 +496,7 @@
     </div>
 
     <div id="footer"></div>
+    </div>
   </section>
 </div>
 
@@ -6342,7 +6346,18 @@ function showSplash(){ showScreen('splash'); showSkipBar(false); window.scrollTo
 function showInstructions(){ showScreen('instructions'); showSkipBar(false); window.scrollTo(0,0); }
 function showStrategy(){ showScreen('strategy'); showSkipBar(false); window.scrollTo(0,0); }
 function showTechniques(){ showScreen('techniques'); showSkipBar(false); window.scrollTo(0,0); }
-function showPractice(){ showScreen('practice'); window.scrollTo(0,0); openRandom(); }
+function showPractice(){ showScreen('practice'); showSkipBar(false); window.scrollTo(0,0); practiceIntro(); }
+function practiceIntro(){
+  $('practiceMain').style.display='none';
+  $('progress').textContent=''; $('practiceRef').innerHTML='';
+  var el=$('practiceIntro'); el.style.display='block';
+  el.innerHTML='<div class="disclaimer"><b>Before you start, please read this.</b>'
+    +'<p>This builder is a warm-up, and it is not perfect. The passages here are <b>written by AI</b> in the style of exam texts; they are not real past-paper extracts.</p>'
+    +'<p>Each passage is deliberately full of language, so it holds <b>many words and phrases worth analysing</b> in a real exam. This builder only has model feedback for a <b>handful</b> of them. If you pick a phrase it does not recognise, that does <b>not</b> mean your choice was wrong: spotting strong language to comment on is part of the skill. Keep choosing the writer’s most striking words, and use this tool to practise the <i>shape</i> of a good paragraph (technique, surface meaning, deeper meaning).</p>'
+    +'<p>To genuinely raise your grade, also sit real past papers, write your answers by hand, and get your teacher’s feedback.</p></div>'
+    +'<div style="margin-top:4px"><button class="act" onclick="startPracticeFromIntro()">Start practising →</button></div>';
+}
+function startPracticeFromIntro(){ $('practiceIntro').style.display='none'; $('practiceMain').style.display='block'; openRandom(); }
 
 /* ---- explicit vs implied trainer ---- */
 /* ---- bug reporting ---- */
