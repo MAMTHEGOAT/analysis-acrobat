@@ -5956,7 +5956,7 @@ var TECH_EXAMPLES = [
   { text:"The classroom was a zoo that afternoon.", mark:"a zoo", technique:"Metaphor", why:"It says the classroom IS a zoo, with no 'like' or 'as'." },
   { text:"Her sharp words were daggers.", mark:"daggers", technique:"Metaphor", why:"It says her words ARE daggers, a direct comparison without 'like' or 'as'." },
   { text:"The city was a jungle of steel and glass.", mark:"a jungle of steel and glass", technique:"Metaphor", why:"It calls the city a jungle directly, with no 'like' or 'as'." },
-  { text:"Time is a thief that we never catch.", mark:"a thief", technique:"Metaphor", why:"It says time IS a thief, a direct comparison without 'like' or 'as'." },
+  { text:"The sky was a sheet of grey steel.", mark:"a sheet of grey steel", technique:"Metaphor", why:"It says the sky IS a sheet of steel, a direct comparison without 'like' or 'as'." },
   { text:"The thunder grumbled in the distance.", mark:"grumbled", technique:"Personification", why:"It gives the thunder the human action of grumbling." },
   { text:"The leaves danced across the pavement.", mark:"danced", technique:"Personification", why:"It gives the leaves the human action of dancing." },
   { text:"The shadows crept along the wall.", mark:"crept", technique:"Personification", why:"It gives the shadows a sneaky, human-like movement." },
@@ -6989,10 +6989,11 @@ function renderTechL3(){
 }
 function checkTechL3(){
   var T=techCur.T, chips=techCur.chips, total=0, found=0, allRight=true;
+  var matchT=function(ct){ return ct===T || (T==='Metaphor' && ct==='Personification'); };
   var btns=$('techChips').querySelectorAll('.chip');
-  chips.forEach(function(c){ if(c.technique===T) total++; });
+  chips.forEach(function(c){ if(matchT(c.technique)) total++; });
   btns.forEach(function(b){
-    var c=chips[+b.dataset.i], sel=b.classList.contains('sel'), isT=(c.technique===T);
+    var c=chips[+b.dataset.i], sel=b.classList.contains('sel'), isT=matchT(c.technique);
     b.disabled=true; b.classList.remove('sel');
     if(isT && sel){ b.classList.add('correct'); found++; }
     else if(isT && !sel){ b.classList.add('missed'); allRight=false; }
@@ -7000,7 +7001,7 @@ function checkTechL3(){
   });
   var ck=$('techCheck'); if(ck) ck.style.display='none';
   tcfeed(allRight?('Correct. You found all '+total+'.'):('You found '+found+' of '+total+'. Green = correct, amber = missed, red = not a '+T+'.'), allRight);
-  var corr=chips.filter(function(c){return c.technique===T;}).map(function(c){return '“'+esc(c.phrase)+'”';}).join(', ');
+  var corr=chips.filter(function(c){return matchT(c.technique);}).map(function(c){return '“'+esc(c.phrase)+'”';}).join(', ');
   var note=(T==='Metaphor')?' <i>(Personification is a special kind of metaphor too, so phrases like “an angry giant” count.)</i>':'';
   techWhyNext('<b>'+esc(T)+' in this passage:</b> '+corr+note);
 }
