@@ -6347,7 +6347,10 @@ function showInstructions(){ showScreen('instructions'); showSkipBar(false); win
 function showStrategy(){ showScreen('strategy'); showSkipBar(false); window.scrollTo(0,0); }
 function showTechniques(){ showScreen('techniques'); showSkipBar(false); window.scrollTo(0,0); }
 function showPractice(){ showScreen('practice'); showSkipBar(false); window.scrollTo(0,0); practiceIntro(); }
+function pracIntroDismissed(){ try{ return localStorage.getItem('aa_pracIntro')==='off'; }catch(e){ return false; } }
+function setPracIntroDismissed(){ try{ localStorage.setItem('aa_pracIntro','off'); }catch(e){} }
 function practiceIntro(){
+  if(pracIntroDismissed()){ startPracticeFromIntro(); return; }
   $('practiceMain').style.display='none';
   $('progress').textContent=''; $('practiceRef').innerHTML='';
   var el=$('practiceIntro'); el.style.display='block';
@@ -6355,9 +6358,10 @@ function practiceIntro(){
     +'<p>This builder is a warm-up, and it is not perfect. The passages here are <b>written by AI</b> in the style of exam texts; they are not real past-paper extracts.</p>'
     +'<p>Each passage is deliberately full of language, so it holds <b>many words and phrases worth analysing</b> in a real exam. This builder only has model feedback for a <b>handful</b> of them. If you pick a phrase it does not recognise, that does <b>not</b> mean your choice was wrong: spotting strong language to comment on is part of the skill. Keep choosing the writer’s most striking words, and use this tool to practise the <i>shape</i> of a good paragraph (technique, surface meaning, deeper meaning).</p>'
     +'<p>To genuinely raise your grade, also sit real past papers, write your answers by hand, and get your teacher’s feedback.</p></div>'
-    +'<div style="margin-top:4px"><button class="act" onclick="startPracticeFromIntro()">Start practising →</button></div>';
+    +'<div class="examopts" style="margin-top:10px"><label><input type="checkbox" id="pracIntroSkip"> Don’t show this again on this device</label></div>'
+    +'<div style="margin-top:8px"><button class="act" onclick="startPracticeFromIntro()">Start practising →</button></div>';
 }
-function startPracticeFromIntro(){ $('practiceIntro').style.display='none'; $('practiceMain').style.display='block'; openRandom(); }
+function startPracticeFromIntro(){ var cb=$('pracIntroSkip'); if(cb&&cb.checked) setPracIntroDismissed(); $('practiceIntro').style.display='none'; $('practiceMain').style.display='block'; openRandom(); }
 
 /* ---- explicit vs implied trainer ---- */
 /* ---- bug reporting ---- */
