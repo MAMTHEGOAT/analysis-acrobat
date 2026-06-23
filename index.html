@@ -6250,8 +6250,18 @@ function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor
    repeating an item across the reshuffle boundary. Each bank is keyed by `name`.
    Bags live in memory only, so they reset on page reload (per session, per device). */
 var PICK_BAGS={}, PICK_LAST={};
+function pickBagSave(name, length){
+  try{ localStorage.setItem('aa_bag_'+name, JSON.stringify({len:length, bag:PICK_BAGS[name]||[], last:(PICK_LAST[name]==null?-1:PICK_LAST[name])})); }catch(e){}
+}
+function pickBagRestore(name, length){
+  try{ var raw=localStorage.getItem('aa_bag_'+name); if(!raw) return;
+    var o=JSON.parse(raw);
+    if(o && o.len===length && o.bag){ PICK_BAGS[name]=o.bag; if(o.last!=null && o.last>=0) PICK_LAST[name]=o.last; }
+  }catch(e){}
+}
 function pickNoRepeat(name, length){
   if(length<=1) return 0;
+  if(PICK_BAGS[name]===undefined) pickBagRestore(name, length); /* resume the saved deck across reloads (once per session) */
   var bag=PICK_BAGS[name];
   if(!bag || !bag.length){
     var arr=[]; for(var i=0;i<length;i++) arr.push(i);
@@ -6262,6 +6272,8 @@ function pickNoRepeat(name, length){
   }
   var idx=bag.pop();
   PICK_LAST[name]=idx;
+  PICK_BAGS[name]=bag;
+  pickBagSave(name, length); /* persist remaining deck so the whole bank is seen before any repeat, even across reloads */
   return idx;
 }
 function jac(a,b){
